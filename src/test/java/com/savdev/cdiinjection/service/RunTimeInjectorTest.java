@@ -3,6 +3,7 @@ package com.savdev.cdiinjection.service;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -45,27 +46,30 @@ public class RunTimeInjectorTest
     RunTimeInjector runTimeInjector;
 
     @Test
-    public void testHelloPojoBean()
+    public void testHelloPojoBean() throws InterruptedException
     {
         Assert.assertNotNull(runTimeInjector);
         Assert.assertNotNull(runTimeInjector.randomInt);
         final int firstResult = runTimeInjector.randomInt.get().intValue();
         Assert.assertNotEquals(0, firstResult);
+        //without some delay, the value may not be updated
+        TimeUnit.SECONDS.sleep(1);
         final int secondResult = runTimeInjector.randomInt.get().intValue();
         Assert.assertNotEquals(0, secondResult);
         Assert.assertNotEquals(firstResult, secondResult);
     }
 
     /**
-     * If we use objects, not primitives, the Instance.get() always return the same pointer
      */
     @Test
-    public void testHelloPojoBeanViaInteger()
+    public void testHelloPojoBeanViaInteger() throws InterruptedException
     {
         Assert.assertNotNull(runTimeInjector);
         Assert.assertNotNull(runTimeInjector.randomInt);
         final Integer firstResult = runTimeInjector.randomInt.get().intValue();
+        //without some delay, the value may not be updated
+        TimeUnit.SECONDS.sleep(1);
         final Integer secondResult = runTimeInjector.randomInt.get().intValue();
-        Assert.assertSame(firstResult, secondResult);
+        Assert.assertNotEquals(firstResult.intValue(), secondResult.intValue());
     }
 }

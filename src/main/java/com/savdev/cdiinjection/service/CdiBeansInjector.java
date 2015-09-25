@@ -16,7 +16,7 @@ public class CdiBeansInjector
     @Inject
     @Informal
     InformalPojoBean informalPojoBean;
-    
+
     public String helloPojoBean()
     {
         return pojoBean.greet();
