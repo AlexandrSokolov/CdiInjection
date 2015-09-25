@@ -51,11 +51,9 @@ public class RunTimeInjectorTest
         Assert.assertNotNull(runTimeInjector);
         Assert.assertNotNull(runTimeInjector.randomInt);
         final int firstResult = runTimeInjector.randomInt.get().intValue();
-        Assert.assertNotEquals(0, firstResult);
         //without some delay, the value may not be updated
         TimeUnit.SECONDS.sleep(1);
         final int secondResult = runTimeInjector.randomInt.get().intValue();
-        Assert.assertNotEquals(0, secondResult);
         Assert.assertNotEquals(firstResult, secondResult);
     }
 

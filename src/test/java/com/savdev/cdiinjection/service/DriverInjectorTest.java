@@ -17,13 +17,13 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.savdev.cdiinjection.bean.cdi.Coder;
-import com.savdev.cdiinjection.bean.cdi.CoderImpl;
+import com.savdev.cdiinjection.bean.cdi.DefaultDriver;
+import com.savdev.cdiinjection.bean.cdi.Driver;
 
 /**
  */
 @RunWith(Arquillian.class)
-public class DefaultCoderInjectorTest
+public class DriverInjectorTest
 {
     @Deployment
     public static WebArchive createDeployment() throws URISyntaxException
@@ -33,7 +33,7 @@ public class DefaultCoderInjectorTest
         File[] files = Maven.resolver().loadPomFromFile(baseDir + File.separator + "pom.xml")
                 .importDependencies(ScopeType.COMPILE, ScopeType.PROVIDED).resolve().withTransitivity().asFile();
         WebArchive war = ShrinkWrap.create(WebArchive.class, "cdiinjection.war")
-                .addClasses(Coder.class, CoderImpl.class, DefaultCoderInjector.class)
+                .addClasses(Driver.class, DefaultDriver.class, DriverInjector.class)
                 .addAsLibraries(files)
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
         System.out.println(war.toString(true));
@@ -41,12 +41,12 @@ public class DefaultCoderInjectorTest
     }
 
     @Inject
-    DefaultCoderInjector defaultCoderInjector;
+    DriverInjector driverInjector;
 
     @Test
     public void testWhatToDo()
     {
-        Assert.assertNotNull(defaultCoderInjector);
-        Assert.assertEquals(CoderImpl.CODER_IMPL, defaultCoderInjector.whatToDo());
+        Assert.assertNotNull(driverInjector);
+        Assert.assertEquals(DefaultDriver.DO_DRIVER, driverInjector.doDrive());
     }
 }

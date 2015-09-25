@@ -6,7 +6,7 @@ import com.savdev.cdiinjection.bean.cdi.Coder;
 
 /**
  */
-public class DefaultCoderInjector
+public class CoderInjector
 {
     @Inject
     Coder coder;
