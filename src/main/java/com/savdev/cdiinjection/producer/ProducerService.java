@@ -2,8 +2,8 @@ package com.savdev.cdiinjection.producer;
 
 import javax.enterprise.inject.Produces;
 
-import com.savdev.cdiinjection.qualifier.MaxNumber;
-import com.savdev.cdiinjection.qualifier.Random;
+import com.savdev.cdiinjection.qualifier.MaxNumberQualifier;
+import com.savdev.cdiinjection.qualifier.RandomQualifier;
 
 /**
  */
@@ -14,14 +14,14 @@ public class ProducerService
     private java.util.Random random = new java.util.Random(System.currentTimeMillis());
 
     @Produces
-    @MaxNumber
+    @MaxNumberQualifier
     int getMaxNumber()
     {
         return maxNumber;
     }
 
     @Produces
-    @Random
+    @RandomQualifier
     int next()
     {
         return random.nextInt(maxNumber);

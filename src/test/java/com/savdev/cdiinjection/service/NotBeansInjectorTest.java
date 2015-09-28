@@ -18,8 +18,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.savdev.cdiinjection.producer.ProducerService;
-import com.savdev.cdiinjection.qualifier.MaxNumber;
-import com.savdev.cdiinjection.qualifier.Random;
+import com.savdev.cdiinjection.qualifier.MaxNumberQualifier;
+import com.savdev.cdiinjection.qualifier.RandomQualifier;
 
 /**
  */
@@ -34,7 +34,7 @@ public class NotBeansInjectorTest
         File[] files = Maven.resolver().loadPomFromFile(baseDir + File.separator + "pom.xml")
                 .importDependencies(ScopeType.COMPILE, ScopeType.PROVIDED).resolve().withTransitivity().asFile();
         WebArchive war = ShrinkWrap.create(WebArchive.class, "cdiinjection.war")
-                .addClasses(NotBeansInjector.class, ProducerService.class, MaxNumber.class, Random.class)
+                .addClasses(NotBeansInjector.class, ProducerService.class, MaxNumberQualifier.class, RandomQualifier.class)
                 .addAsLibraries(files)
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
         System.out.println(war.toString(true));

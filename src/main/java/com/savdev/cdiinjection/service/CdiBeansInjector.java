@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 import com.savdev.cdiinjection.bean.cdi.InformalPojoBean;
 import com.savdev.cdiinjection.bean.cdi.PojoBean;
-import com.savdev.cdiinjection.qualifier.Informal;
+import com.savdev.cdiinjection.qualifier.InformalQualifier;
 
 /**
  */
@@ -14,7 +14,7 @@ public class CdiBeansInjector
     PojoBean pojoBean;
 
     @Inject
-    @Informal
+    @InformalQualifier
     InformalPojoBean informalPojoBean;
 
     public String helloPojoBean()

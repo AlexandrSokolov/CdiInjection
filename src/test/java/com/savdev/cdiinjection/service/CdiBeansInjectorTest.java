@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.savdev.cdiinjection.bean.cdi.InformalPojoBean;
 import com.savdev.cdiinjection.bean.cdi.PojoBean;
-import com.savdev.cdiinjection.qualifier.Informal;
+import com.savdev.cdiinjection.qualifier.InformalQualifier;
 
 /**
  */
@@ -34,7 +34,7 @@ public class CdiBeansInjectorTest
         File[] files = Maven.resolver().loadPomFromFile(baseDir + File.separator + "pom.xml")
                 .importDependencies(ScopeType.COMPILE, ScopeType.PROVIDED).resolve().withTransitivity().asFile();
         WebArchive war = ShrinkWrap.create(WebArchive.class, "cdiinjection.war")
-                .addClasses(PojoBean.class, InformalPojoBean.class, Informal.class, CdiBeansInjector.class)
+                .addClasses(PojoBean.class, InformalPojoBean.class, InformalQualifier.class, CdiBeansInjector.class)
                 .addAsLibraries(files)
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
         System.out.println(war.toString(true));

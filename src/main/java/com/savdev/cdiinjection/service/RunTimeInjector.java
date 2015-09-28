@@ -3,13 +3,13 @@ package com.savdev.cdiinjection.service;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
-import com.savdev.cdiinjection.qualifier.Random;
+import com.savdev.cdiinjection.qualifier.RandomQualifier;
 
 /**
  */
 public class RunTimeInjector
 {
     @Inject
-    @Random
+    @RandomQualifier
     Instance<Integer> randomInt;
 }
